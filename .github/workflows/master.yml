@@ -1,6 +1,7 @@
 name: Extract Reddit Posts and Send to Telegram
 
 on:
+   workflow_dispatch:
    schedule:
      - cron: "*/15 * * * *"
   # push:
