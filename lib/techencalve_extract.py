@@ -48,7 +48,7 @@ def extract_techenclave_data():
                     item.get("content:encoded", "")
                 ),
             }
-            insert_mongo_collection(data["guid"]["#text"], mongo_collection)
+            insert_mongo_collection(item["guid"]["#text"], mongo_collection)
             techenclave_data.append(techenclave_dict)
     return techenclave_data
 
