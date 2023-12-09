@@ -5,8 +5,9 @@ from techencalve_extract import extract_techenclave_data
 import os
 
 # Define your constants
-TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
-TELEGRAM_CHAT_ID =  os.environ.get('TELEGRAM_CHAT_ID')
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+
 
 def main():
     # Initialize the Telegram Bot
@@ -21,12 +22,13 @@ def main():
         for post in posts:
             send_post_to_telegram(bot, post, TELEGRAM_CHAT_ID)
 
+
 def send_post_to_telegram(bot, post, chat_id):
-    subreddit = post.get('subreddit', 'Techenclave')
-    title = post.get('title', 'Null')
-    posted_ago = post.get('posted_ago', 'Null')
-    url = post.get('url', 'Null')
-    text = post.get('selftext', 'Null')
+    subreddit = post.get("subreddit", "Techenclave")
+    title = post.get("title", "Null")
+    posted_ago = post.get("posted_ago", "Null")
+    url = post.get("url", "Null")
+    text = post.get("selftext", "Null")
 
     msg = f"""
         Subreddit: {subreddit}
@@ -35,8 +37,9 @@ def send_post_to_telegram(bot, post, chat_id):
         URL: {url}
         Text: {text}
     """
-    
+
     bot.send_message(chat_id=chat_id, text=msg)
+
 
 if __name__ == "__main__":
     main()
