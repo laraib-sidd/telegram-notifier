@@ -36,7 +36,7 @@ def extract_techenclave_data():
     techenclave_data = []
 
     for item in dict_data.get("rss", {}).get("channel", {}).get("item", []):
-        id_exist = check_post_id_mongo(data["guid"]["#text"], mongo_collection)
+        id_exist = check_post_id_mongo(item["guid"]["#text"], mongo_collection)
         if id_exist:
             continue
         else:
