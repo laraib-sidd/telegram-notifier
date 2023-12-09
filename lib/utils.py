@@ -4,12 +4,12 @@ import pymongo
 import os
 import praw
 
+
 def get_reddit_client():
     reddit = praw.Reddit(
         client_id=os.environ.get("REDDIT_CLIENT_ID"),
         client_secret=os.environ.get("REDDIT_CLIENT_SECRET"),
         user_agent=os.environ.get("REDDIT_USER_AGENT"),
-        
     )
     return reddit
 
@@ -64,11 +64,11 @@ def calculate_time_difference(utc_timestamp):
         hours_passed = minutes_passed / 60
         return f"{hours_passed:.2f} hours have passed this post was created {ist_dt:%Y/%m/%d-%H:%M} hours"
     else:
-        return f"{minutes_passed:.2f} minutes have passed this post was created {ist_dt:%Y/%m/%d-%H:%M} hours" 
+        return f"{minutes_passed:.2f} minutes have passed this post was created {ist_dt:%Y/%m/%d-%H:%M} hours"
 
 
-def get_filtered_posts_with_praw(sub_name, reddit_client,mongo_client):
-    VALID_FLAIRS = os.getenv('VALID_FLAIRS', '[]').split(',')
+def get_filtered_posts_with_praw(sub_name, reddit_client, mongo_client):
+    VALID_FLAIRS = os.getenv("VALID_FLAIRS", "[]").split(",")
     subreddit_client = reddit_client.subreddit(sub_name)
     mongo_collection = mongo_client[sub_name]
     filtered_posts = []
@@ -97,9 +97,11 @@ def get_all_posts():
     reddit_client = get_reddit_client()
     mongo_client = create_mongo_client()
     filtered_posts = []
-    sub_names = os.getenv('SUB_NAMES', '[]').split(',')
+    sub_names = os.getenv("SUB_NAMES", "[]").split(",")
     for sub_name in sub_names:
-        filtered_posts.append(get_filtered_posts_with_praw(sub_name,reddit_client,mongo_client))
+        filtered_posts.append(
+            get_filtered_posts_with_praw(sub_name, reddit_client, mongo_client)
+        )
     return filtered_posts
 
 

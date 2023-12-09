@@ -6,7 +6,7 @@ on:
 #       - main
     workflow_dispatch:
 jobs:
-    build:
+    Send-Message-to-Telegram:
       runs-on: ubuntu-latest
       env:
         MONGO_USER: ${{ vars.MONGO_USER }}
@@ -20,6 +20,7 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
         TELEGRAM_TOKEN: ${{ vars.TELEGRAM_TOKEN }}
         VALID_FLAIRS: ${{ vars.VALID_FLAIRS }}
+        TECHENCLAVE_URL: ${{ vars.TECHENCLAVE_URL }}
   
       steps:  
       - uses: actions/checkout@v3
@@ -27,7 +28,7 @@ jobs:
       - name: Set up Environment
         uses: ./.github/actions/setup_py_env
   
-      - name: Linting check
+      - name: Send Message
         run: |
           echo "Sending messsages to Telegram...."
           poetry run python3 lib/test.py
