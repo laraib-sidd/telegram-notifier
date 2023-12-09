@@ -14,7 +14,7 @@ def main():
 
     # Get filtered subreddit posts
     filtered_sub_posts = get_all_posts()
-    # filtered_sub_posts.append(extract_techenclave_data())
+    filtered_sub_posts.append(extract_techenclave_data())
 
     # Loop through the posts and send each one to Telegram
     for posts in filtered_sub_posts:

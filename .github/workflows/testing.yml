@@ -20,6 +20,7 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
         TELEGRAM_TOKEN: ${{ vars.TELEGRAM_TOKEN }}
         VALID_FLAIRS: ${{ vars.VALID_FLAIRS }}
+        TECHENCLAVE_URL: ${{ vars.TECHENCLAVE_URL }}
   
       steps:  
       - uses: actions/checkout@v3
