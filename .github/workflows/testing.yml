@@ -6,7 +6,7 @@ on:
 #       - main
     workflow_dispatch:
 jobs:
-    build:
+    Send-Message-to-Telegram:
       runs-on: ubuntu-latest
       env:
         MONGO_USER: ${{ vars.MONGO_USER }}
@@ -28,7 +28,7 @@ jobs:
       - name: Set up Environment
         uses: ./.github/actions/setup_py_env
   
-      - name: Send Message to Telegram
+      - name: Send Message
         run: |
           echo "Sending messsages to Telegram...."
           poetry run python3 lib/test.py
