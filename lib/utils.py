@@ -62,9 +62,9 @@ def calculate_time_difference(utc_timestamp):
 
     if minutes_passed >= 60:
         hours_passed = minutes_passed / 60
-        return f"{hours_passed:.2f} hours have passed this post was created {ist_dt:%Y/%m/%d-%H:%M}"
+        return f"{hours_passed:.2f} hours have passed this post was created {ist_dt:%Y/%m/%d-%H:%M} hours"
     else:
-        return f"{minutes_passed:.2f} minutes have passed this post was created {ist_dt:%Y/%m/%d-%H:%M}" 
+        return f"{minutes_passed:.2f} minutes have passed this post was created {ist_dt:%Y/%m/%d-%H:%M} hours" 
 
 
 def get_filtered_posts_with_praw(sub_name, reddit_client,mongo_client):
@@ -80,9 +80,7 @@ def get_filtered_posts_with_praw(sub_name, reddit_client,mongo_client):
             if id_exist:
                 continue
             else:
-                posted_ago = calculate_time_difference(post.created_utc)
-                
-                post_dict["posted_ago"] = posted_ago
+                post_dict["posted_ago"] = calculate_time_difference(post.created_utc)
                 post_dict["title"] = post.title
                 post_dict["url"] = post.url
                 post_dict["selftext"] = post.selftext
@@ -100,8 +98,8 @@ def get_all_posts():
     mongo_client = create_mongo_client()
     filtered_posts = []
     sub_names = os.getenv('SUB_NAMES', '[]').split(',')
-    for i in range(len(sub_names)):
-        filtered_posts.append(get_filtered_posts_with_praw(sub_names[i],reddit_client,mongo_client))
+    for sub_name in sub_names:
+        filtered_posts.append(get_filtered_posts_with_praw(sub_name,reddit_client,mongo_client))
     return filtered_posts
 
 

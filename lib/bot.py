@@ -1,6 +1,7 @@
 # Description: This file contains the Telegram Bot logic
 from telegram import Bot
 from utils import get_all_posts
+from techencalve_extract import extract_techenclave_data
 import os
 
 # Define your constants
@@ -13,6 +14,7 @@ def main():
 
     # Get filtered subreddit posts
     filtered_sub_posts = get_all_posts()
+    filtered_sub_posts.append(extract_techenclave_data())
 
     # Loop through the posts and send each one to Telegram
     for posts in filtered_sub_posts:
@@ -20,9 +22,9 @@ def main():
             send_post_to_telegram(bot, post, TELEGRAM_CHAT_ID)
 
 def send_post_to_telegram(bot, post, chat_id):
-    subreddit = post.get('subreddit', 'Null')
+    subreddit = post.get('subreddit', 'Techenclave')
     title = post.get('title', 'Null')
-    posted_ago = f"{post.get('posted_ago', 'Null')} hours"
+    posted_ago = post.get('posted_ago', 'Null')
     url = post.get('url', 'Null')
     text = post.get('selftext', 'Null')
 
